@@ -1,3 +1,4 @@
+/* 1. Global Reset */
 * {
     box-sizing: border-box;
 }
@@ -7,12 +8,16 @@ body {
     margin: 0;
 }
 
+/* 2. Layout Container */
 main {
     margin-inline: auto;
-    padding: 36px;
+    /* Changed padding to be responsive slightly later, 
+       but keeping a safe default here */
+    padding: 36px; 
     max-width: 600px;
 }
 
+/* 3. Header Styles */
 .header {
     display: flex;
     align-items: center;
@@ -32,11 +37,19 @@ main {
     margin-right: auto;
 }
 
+/* 4. Form Grid */
 .form {
     display: grid;
-    grid-template: auto auto / 1fr 1fr;
+    /* Default: 2 columns of equal width */
+    grid-template-columns: 1fr 1fr; 
     gap: 17px;
     margin-bottom: 17px;
+}
+
+/* Ensure labels act as containers for inputs */
+.form label {
+    display: block;
+    font-size: 0.9rem; /* Added nice typography for labels */
 }
 
 .form input {
@@ -45,22 +58,24 @@ main {
     border-radius: 5px;
     border: 1px solid #D5D4D8;
     text-indent: 5px;
+    min-height: 40px;
+    font-family: "Karla", sans-serif;
 }
 
 .form button {
-    grid-column: 1 / -1;
+    /* Span all available columns (works for 1 or 2 cols) */
+    grid-column: 1 / -1; 
     border-radius: 5px;
     background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.form input, .form button {
     min-height: 40px;
     font-family: "Karla", sans-serif;
+    font-weight: 700; /* Added weight for better readability */
 }
 
+/* 5. Meme Display */
 .meme {
     position: relative;
     display: flex;
@@ -71,12 +86,14 @@ main {
 
 .meme > img {
     max-width: 100%;
-    height: auto;
+    /* display: block removes the tiny gap at the bottom of images */
+    display: block; 
     border-radius: 3px;
 }
 
 .meme span {
     position: absolute;
+    width: 80%; /* Prevents text from hitting the very edge */
     text-align: center;
     margin-block: 15px;
     padding-inline: 5px;
@@ -85,6 +102,9 @@ main {
     text-transform: uppercase;
     color: white;
     letter-spacing: 1px;
+    /* Pointer events none ensures you can drag/save image 
+       without the text blocking the mouse */
+    pointer-events: none; 
     text-shadow:
         2px 2px 0 #000,
         -2px -2px 0 #000,
@@ -103,4 +123,22 @@ main {
 
 .top {
     top: 0;
+}
+
+/* 6. MOBILE RESPONSIVENESS */
+@media (max-width: 480px) {
+    /* Reduce padding so the meme is bigger on phone screens */
+    main {
+        padding: 15px;
+    }
+
+    /* Stack inputs vertically */
+    .form {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reduce font size so it doesn't cover the whole image */
+    .meme span {
+        font-size: 1.5rem;
+    }
 }
