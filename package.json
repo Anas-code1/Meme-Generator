@@ -8,11 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-   "react": "^18.2.0",
-   "react-dom": "^18.2.0",
-    "vite": "latest"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "vite": "^7.3.1"
   }
 }
